@@ -1,7 +1,7 @@
 <template>
     <v-card outlined>
         <v-card-title>
-            A # {{item._links.self.href.split("/")[item._links.self.href.split("/").length - 1]}}
+            BoundedContext465A # {{item._links.self.href.split("/")[item._links.self.href.split("/").length - 1]}}
         </v-card-title>
 
         <v-card-text>
@@ -11,7 +11,7 @@
             <v-btn text color="deep-purple lighten-2" large @click="goList">List</v-btn>
             <v-spacer></v-spacer>
             <v-btn
-                    color="deep-purple lighten-2"
+                    color="primary"
                     text
                     @click="edit"
                     v-if="!editMode"
@@ -19,7 +19,7 @@
                 Edit
             </v-btn>
             <v-btn
-                    color="deep-purple lighten-2"
+                    color="primary"
                     text
                     @click="save"
                     v-else
@@ -27,7 +27,7 @@
                 Save
             </v-btn>
             <v-btn
-                    color="deep-purple lighten-2"
+                    color="primary"
                     text
                     @click="remove"
                     v-if="!editMode"
@@ -35,7 +35,7 @@
                 Delete
             </v-btn>
             <v-btn
-                    color="deep-purple lighten-2"
+                    color="primary"
                     text
                     @click="editMode = false"
                     v-if="editMode"
@@ -51,7 +51,7 @@
     const axios = require('axios').default;
 
     export default {
-        name: 'ADetail',
+        name: 'BoundedContext465ADetail',
         components:{},
         props: {
         },

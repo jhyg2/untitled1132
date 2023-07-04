@@ -10,7 +10,7 @@
                         hide-overlay
                         transition="dialog-bottom-transition"
                 >
-                    <A :offline="offline" class="video-card" :isNew="true" :editMode="true" v-model="newValue" 
+                    <BoundedContext465A :offline="offline" class="video-card" :isNew="true" :editMode="true" v-model="newValue" 
                             @add="append" v-if="tick"/>
 
                     <v-btn
@@ -24,7 +24,7 @@
                     </v-btn>
                 </v-dialog>
 
-                <v-btn  color="blue" fab dark large
+                <v-btn  color="primary" fab dark large
                         style="position:fixed; bottom: 5%; right: 2%; z-index:99"
                         @click="openDialog=true;"
                 >
@@ -33,7 +33,7 @@
             </div>
         </v-col>
         <v-row>
-            <A :offline="offline" class="video-card" v-for="(value, index) in values" v-model="values[index]" v-bind:key="index" @delete="remove"/>
+            <BoundedContext465A :offline="offline" class="video-card" v-for="(value, index) in values" v-model="values[index]" v-bind:key="index" @delete="remove"/>
         </v-row>
     </div>
 </template>
@@ -41,12 +41,12 @@
 <script>
 
     const axios = require('axios').default;
-    import A from './../A.vue';
+    import BoundedContext465A from './../BoundedContext465A.vue';
 
     export default {
-        name: 'AManager',
+        name: 'BoundedContext465AManager',
         components: {
-            A,
+            BoundedContext465A,
         },
         props: {
             offline: Boolean

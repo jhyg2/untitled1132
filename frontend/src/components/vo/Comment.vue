@@ -1,25 +1,26 @@
 <template>
     <div style="margin: 0 -15px 0 -15px;">
-        <v-card-title v-if="editMode">
+        <v-card-title>
             {{label}}
         </v-card-title>
         <v-card-text v-if="value">
             <div v-if="editMode" style="margin-top:-20px;">
-                <v-text-field type="number" label="Amount" v-model="value.amount"/>
-            </div>
-            <div v-if="editMode" style="margin-top:-20px;">
-                <v-text-field label="Currency" v-model="value.currency"/>
+                <v-text-field label="Address" v-model="value.address"/>
             </div>
             <div v-else>
-                <v-card
-                    class="mx-auto"
-                    color="surface"
-                    dark
-                    min-width="200"
-                    max-width="400"
-                    style="padding:10px 15px 10px 15px; font-weight:500; font-size:20px; text-align:center;"> 
-                    {{value.amount}} {{value.currency}} 
-                </v-card>
+                Address :  {{value.address }}
+            </div>
+            <div v-if="editMode" style="margin-top:-20px;">
+                <v-text-field label="Subject" v-model="value.subject"/>
+            </div>
+            <div v-else>
+                Subject :  {{value.subject }}
+            </div>
+            <div v-if="editMode" style="margin-top:-20px;">
+                <v-text-field label="Content" v-model="value.content"/>
+            </div>
+            <div v-else>
+                Content :  {{value.content }}
             </div>
         </v-card-text>
     </div>
@@ -27,7 +28,7 @@
 
 <script>
     export default {
-        name:"Money",
+        name:"Email",
         props: {
             editMode: Boolean,
             value : Object,
@@ -36,12 +37,11 @@
         created(){
             if(!this.value) {
                 this.value = {
-                    'amount': 0,
-                    'currency': '',
+                    'address': '',
+                    'subject': '',
+                    'content': '',
                 };
             }
-
-            this.value.amount = this.value.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         },
         watch: {
             value(newVal) {
@@ -52,4 +52,10 @@
 </script>
 
 <style scoped>
+    .address-v-card-title {
+        display: contents;
+    }
+    .address-v-text-field {
+        margin-top:5px;
+    }
 </style>

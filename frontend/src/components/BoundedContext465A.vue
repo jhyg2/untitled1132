@@ -1,19 +1,19 @@
 <template>
 
-    <v-card style="width:450px;" outlined>
+    <v-card style="width:450px;" outlined color="surface">
         <template slot="progress">
             <v-progress-linear
-                    color="deep-purple"
+                    color="primary-darker-1"
                     height="10"
                     indeterminate
             ></v-progress-linear>
         </template>
 
         <v-card-title v-if="value._links">
-            A # {{value._links.self.href.split("/")[value._links.self.href.split("/").length - 1]}}
+            BoundedContext465A # {{value._links.self.href.split("/")[value._links.self.href.split("/").length - 1]}}
         </v-card-title >
         <v-card-title v-else>
-            A
+            BoundedContext465A
         </v-card-title >
 
         <v-card-text>
@@ -22,7 +22,7 @@
         <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
-                    color="deep-purple lighten-2"
+                    color="primary"
                     text
                     @click="edit"
                     v-if="!editMode"
@@ -30,15 +30,16 @@
                 Edit
             </v-btn>
             <v-btn
-                    color="deep-purple lighten-2"
+                    color="primary"
                     text
                     @click="save"
                     v-else
             >
-                Save
+                C
+                C1
             </v-btn>
             <v-btn
-                    color="deep-purple lighten-2"
+                    color="primary"
                     text
                     @click="remove"
                     v-if="!editMode"
@@ -46,7 +47,7 @@
                 Delete
             </v-btn>
             <v-btn
-                    color="deep-purple lighten-2"
+                    color="primary"
                     text
                     @click="editMode = false"
                     v-if="editMode && !isNew"
@@ -55,7 +56,7 @@
             </v-btn>
         </v-card-actions>
         <v-card-actions>
-            <v-spacer></v-spacer>                        
+            <v-spacer></v-spacer>
         </v-card-actions>
 
         <v-snackbar
@@ -78,7 +79,7 @@
 
 
     export default {
-        name: 'A',
+        name: 'BoundedContext465A',
         components:{
         },
         props: {
@@ -94,7 +95,7 @@
                 text: ''
             },
         }),
-        created(){
+        computed:{
         },
         methods: {
             selectFile(){

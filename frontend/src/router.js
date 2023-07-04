@@ -5,8 +5,8 @@ import Router from 'vue-router'
 Vue.use(Router);
 
 
-import AManager from "./components/listers/ACards"
-import ADetail from "./components/listers/ADetail"
+import BoundedContext465AManager from "./components/listers/BoundedContext465ACards"
+import BoundedContext465ADetail from "./components/listers/BoundedContext465ADetail"
 
 
 export default new Router({
@@ -14,14 +14,14 @@ export default new Router({
     base: process.env.BASE_URL,
     routes: [
             {
-                path: '/as',
-                name: 'AManager',
-                component: AManager
+                path: '/boundedContext465s/as',
+                name: 'BoundedContext465AManager',
+                component: BoundedContext465AManager
             },
             {
-                path: '/as/:id',
-                name: 'ADetail',
-                component: ADetail
+                path: '/boundedContext465s/as/:id',
+                name: 'BoundedContext465ADetail',
+                component: BoundedContext465ADetail
             },
 
 

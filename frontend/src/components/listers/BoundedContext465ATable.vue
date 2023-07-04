@@ -1,27 +1,11 @@
 <template>
     <div>
-        <v-list two-line>
-            <template>
-                <v-list-item v-for="(data, n) in values" :key="n">
-                    <v-list-item-avatar color="grey darken-1">
-                        <v-img :src="data.photo ? data.photo:'https://cdn.vuetifyjs.com/images/cards/cooking.png'"/>
-                    </v-list-item-avatar>
-
-                    <v-list-item-content>
-                        <v-list-item-title style="margin-bottom:10px;">
-                            
-                        </v-list-item-title>
-
-                        <v-list-item-subtitle style="font-size:25px; font-weight:700;">
-                            [ Id :  {{data.id }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        </v-list-item-subtitle>
-
-                    </v-list-item-content>
-                </v-list-item>
-
-                <v-divider v-if="n !== 6" :key="`divider-${n}`" inset></v-divider>
-            </template>
-        </v-list>
+        <v-data-table
+                :headers="headers"
+                :items="values"
+                :items-per-page="5"
+                class="elevation-1"
+        ></v-data-table>
 
         <v-col style="margin-bottom:40px;">
             <div class="text-center">
@@ -35,7 +19,7 @@
                     <template v-slot:activator="{ on, attrs }">
                         <v-fab-transition>
                             <v-btn
-                                    color="blue"
+                                    color="primary"
                                     fab
                                     dark
                                     large
@@ -47,7 +31,7 @@
                         </v-fab-transition>
                     </template>
 
-                    <A :offline="offline" class="video-card" :isNew="true" :editMode="true" v-model="newValue" @add="append" v-if="tick"/>
+                    <BoundedContext465A :offline="offline" class="video-card" :isNew="true" :editMode="true" v-model="newValue" @add="append" v-if="tick"/>
                 
                     <v-btn
                             style="postition:absolute; top:2%; right:2%"
@@ -66,12 +50,12 @@
 
 <script>
     const axios = require('axios').default;
-    import A from './../A.vue';
+    import BoundedContext465A from './../BoundedContext465A.vue';
 
     export default {
-        name: 'AManager',
+        name: 'BoundedContext465AManager',
         components: {
-            A,
+            BoundedContext465A,
         },
         props: {
             offline: Boolean,
@@ -80,6 +64,11 @@
         },
         data: () => ({
             values: [],
+            headers: 
+                [
+                    { text: "id", value: "id" },
+                ],
+            a : [],
             newValue: {},
             tick : true,
             openDialog : false,
@@ -88,12 +77,12 @@
             if(this.offline){
                 if(!this.values) this.values = [];
                 return;
-            } 
+            }
 
             var temp = await axios.get(axios.fixUrl('/as'))
             temp.data._embedded.as.map(obj => obj.id=obj._links.self.href.split("/")[obj._links.self.href.split("/").length - 1])
             this.values = temp.data._embedded.as;
-            
+
             this.newValue = {
             }
         },
@@ -111,18 +100,8 @@
                 this.$nextTick(function(){
                     this.tick=true
                 })
-            }
-        },
-    };
-</script>
-
-
-<style>
-    .video-card {
-        width:300px; 
-        margin-left:4.5%; 
-        margin-top:50px; 
-        margin-bottom:50px;
+            },
+        }
     }
-</style>
+</script>
 
