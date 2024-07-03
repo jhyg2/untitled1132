@@ -12,7 +12,7 @@
                 <v-btn
                 v-if="avatarMode"
                 icon
-                color="primary"
+                color="grey"
                 @click="changeUserCard()"
                 >
                     <v-icon>mdi-credit-card</v-icon>
@@ -20,7 +20,7 @@
                 <v-btn
                 v-if="!avatarMode"
                 icon
-                color="primary"
+                color="grey"
                 @click="changeUserCard()"
                 >
                     <v-icon>mdi-account-box</v-icon>

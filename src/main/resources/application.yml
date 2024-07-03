@@ -1,6 +1,9 @@
 server:
   port: 8080
 
+spring:
+  application:
+    name: boundedcontext465
 ---
 
 spring:
@@ -10,6 +13,7 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+        implicit_naming_strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl
   cloud:
     stream:
       kafka:
@@ -26,10 +30,14 @@ spring:
       bindings:
         event-in:
           group: BoundedContext465
+#<<< EDA / Topic Name
           destination: untitled
+#>>> EDA / Topic Name
           contentType: application/json
         event-out:
+#<<< EDA / Topic Name
           destination: untitled
+#>>> EDA / Topic Name
           contentType: application/json
 
 logging:
@@ -39,12 +47,18 @@ logging:
 
 
 server:
-  port: 8081
+  port: 8082
 
 ---
 
 spring:
   profiles: docker
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        implicit_naming_strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl
   cloud:
     stream:
       kafka:

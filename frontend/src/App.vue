@@ -3,7 +3,7 @@
 <template>
     <v-app id="inspire">
         <div>
-            <v-app-bar color="primary" app clipped-left flat>
+            <v-app-bar app clipped-left flat>
                 <v-toolbar-title>
                     <span class="second-word font uppercase"
                         style="font-weight:700;"
@@ -28,23 +28,26 @@
                     to="/" 
                     @click="goHome()"
                     style="margin-left:10px; font-size:20px; cursor:pointer;"
-		></span> 
+                    ></span> 
                 <v-spacer></v-spacer>
-
             </v-app-bar>
 
             <v-navigation-drawer app clipped flat v-model="sideBar">
                 <v-list>
+
+
                     <v-list-item
                         class="px-2"
                         key="as"
                         to="/as"
                         @click="changeUrl()"
-                        color="primary"
+                        color="deep-purple lighten-2"
                         style="font-weight:700;"
                     >
-                        BoundedContext465A
+                        A
                     </v-list-item>
+
+
 
 
                 </v-list>
@@ -72,24 +75,18 @@
                             </v-list-item>
 
                             <v-card-actions>
-                                <v-tooltip bottom>
-                                    <template v-slot:activator="{ on }">
-                                        <v-btn 
-                                            v-on="on"
-                                            class="mx-auto"
-                                            outlined
-                                            rounded
-                                            key="as"
-                                            to="/as"
-                                            @click="changeUrl()"
-                                            color="primary"
-                                            style="font-weight:500; font-size:20px; padding:15px; border:solid 2px; max-width:250px; overflow:hidden"
-                                        >
-                                            BoundedContext465A
-                                        </v-btn>
-                                    </template>
-                                    <span>BoundedContext465A</span>
-                                </v-tooltip>
+                                <v-btn 
+                                    class="mx-auto"
+                                    outlined
+                                    rounded
+                                    key="as"
+                                    to="/as"
+                                    @click="changeUrl()"
+                                    color="deep-purple lighten-2"
+                                    style="font-weight:500; font-size:20px; padding:15px; border:solid 2px;"
+                                >
+                                    A
+                                </v-btn>
                             </v-card-actions>
                         </v-card>
 
@@ -103,6 +100,7 @@
 
 export default {
     name: "App",
+
     data: () => ({
         useComponent: "",
         drawer: true,
@@ -114,7 +112,6 @@ export default {
     async created() {
       var path = document.location.href.split("#/")
       this.urlPath = path[1];
-
     },
 
     mounted() {
@@ -132,15 +129,9 @@ export default {
         },
         goHome() {
             this.urlPath = null;
-        },
+        }
     }
 };
 </script>
 <style>
-.v-application {
-    background-color:  !important;
-}
-*{
-    font-family:  !important;
-}
 </style>

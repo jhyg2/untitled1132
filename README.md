@@ -1,77 +1,67 @@
-# 
+# BoundedContext465
 
-## Model
-www.msaez.io/#/storming/97c60d1a19de612dee41bb197334698f
+## Running in local development environment
 
-## Before Running Services
-### Make sure there is a Kafka server running
 ```
-cd kafka
-docker-compose up
-```
-- Check the Kafka messages:
-```
-cd kafka
-docker-compose exec -it kafka /bin/bash
-cd /bin
-./kafka-console-consumer --bootstrap-server localhost:9092 --topic
-```
-
-## Run the backend micro-services
-See the README.md files inside the each microservices directory:
-
-- BoundedContext465
-
-
-## Run API Gateway (Spring Gateway)
-```
-cd gateway
 mvn spring-boot:run
 ```
 
-## Test by API
-- BoundedContext465
+## Packaging and Running in docker environment
+
 ```
- http :8088/as id="id" 
+mvn package -B -DskipTests
+docker build -t username/BoundedContext465:v1 .
+docker run username/BoundedContext465:v1
 ```
 
+## Push images and running in Kubernetes
 
-## Run the frontend
 ```
-cd frontend
-npm i
-npm run serve
-```
+docker login 
+# in case of docker hub, enter your username and password
 
-## Test by UI
-Open a browser to localhost:8088
-
-## Required Utilities
-
-- httpie (alternative for curl / POSTMAN) and network utils
-```
-sudo apt-get update
-sudo apt-get install net-tools
-sudo apt install iputils-ping
-pip install httpie
+docker push username/BoundedContext465:v1
 ```
 
-- kubernetes utilities (kubectl)
+Edit the deployment.yaml under the /kubernetes directory:
 ```
-curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+    spec:
+      containers:
+        - name: BoundedContext465
+          image: username/BoundedContext465:latest   # change this image name
+          ports:
+            - containerPort: 8080
+
 ```
 
-- aws cli (aws)
+Apply the yaml to the Kubernetes:
 ```
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
-sudo ./aws/install
+kubectl apply -f kubernetes/deployment.yaml
 ```
 
-- eksctl 
+See the pod status:
 ```
-curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
-sudo mv /tmp/eksctl /usr/local/bin
+kubectl get pods -l app=BoundedContext465
 ```
+
+If you have no problem, you can connect to the service by opening a proxy between your local and the kubernetes by using this command:
+```
+# new terminal
+kubectl port-forward deploy/BoundedContext465 8080:8080
+
+# another terminal
+http localhost:8080
+```
+
+If you have any problem on running the pod, you can find the reason by hitting this:
+```
+kubectl logs -l app=BoundedContext465
+```
+
+Following problems may be occurred:
+
+1. ImgPullBackOff:  Kubernetes failed to pull the image with the image name you've specified at the deployment.yaml. Please check your image name and ensure you have pushed the image properly.
+1. CrashLoopBackOff: The spring application is not running properly. If you didn't provide the kafka installation on the kubernetes, the application may crash. Please install kafka firstly:
+
+https://labs.msaez.io/#/courses/cna-full/full-course-cna/ops-utility
 

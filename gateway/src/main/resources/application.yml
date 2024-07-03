@@ -9,7 +9,7 @@ spring:
     gateway:
       routes:
         - id: BoundedContext465
-          uri: http://localhost:8082
+          uri: http://localhost:8081
           predicates:
             - Path=/as/**, 
         - id: frontend
